@@ -12,19 +12,20 @@
 
 .image:hover {
     cursor: pointer;
-    transform: scale(0.98);
+    transform: scale(0.95);
     transition: all 0.3s ease-out;
+    box-shadow: 0 0 1px 0px rgb(181, 192, 206);
 }
 
 .image img {
     width: var(--imageWidth);
 }
 
-.image-wrapper img {
+img {
     transition: all 0.3s ease-in;
 }
 
-.image-wrapper img:hover {
-    transform: scale(1.05);
+.image:hover img:hover {
+    transform: scale(1.5);
     transition: all 0.3s ease-out;
 }
