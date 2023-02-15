@@ -1,7 +1,7 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import "./Picture.css";
 
-const Picture = (props) => {
+const Picture = memo((props) => {
     return (
         <>
             <div className="image">
@@ -9,6 +9,6 @@ const Picture = (props) => {
             </div>
         </>
     )
-}
+});
 
 export default Picture;

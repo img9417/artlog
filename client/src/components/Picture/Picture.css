@@ -1,5 +1,5 @@
 :root {
-    --imageWidth: 350px;
+    --imageWidth: 500px;
 }
 
 .image {
@@ -23,9 +23,5 @@
 
 img {
     transition: all 0.3s ease-in;
-}
-
-.image:hover img:hover {
     transform: scale(1.5);
-    transition: all 0.3s ease-out;
 }

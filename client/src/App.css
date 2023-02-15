@@ -10,6 +10,8 @@
 body {
   width: 100%;
   background-color: #fffbf7;
+  color: #777;
+  scroll-behavior: smooth;
 }
 
 #root {
@@ -17,13 +19,13 @@ body {
 }
 
 .wrapper {
+  margin: 0 auto;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 
   max-width: var(--maxWidth);
-  margin: 0 auto;
 }
 
 .aside-left {
@@ -34,29 +36,38 @@ body {
   transform: rotate(90deg);
 }
 
-.main-frame {
-  flex: 1;
-}
-
-.aside-right {
-  flex: 0.2;
-}
-
-.aside-right li {
-  list-style: none;
-}
-
-.aside-right li:hover {
-  cursor: pointer;
-}
-
 .border {
   display: block;
-  border: 1px solid #b4afa8bb;
+  border: 1px solid #b4afa88d;
   width: 2em;
   position: absolute;
   top: 0;
   left: 5.3%;
+}
+
+
+.main-frame {
+  flex: 0.3;
+}
+
+.aside-right {
+  flex: 0.5;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.aside-right li {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2em;
+  font-weight: bolder;
+  list-style: none;
+  transition: all 0.3s;
+  text-align: right;
+}
+
+.aside-right li.active {
+  font-size: 4em;
+  color: black;
 }
 
 @media (prefers-reduced-motion: no-preference) {
