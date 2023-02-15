@@ -1,0 +1,30 @@
+:root {
+    --imageWidth: 350px;
+}
+
+.image {
+    width: var(--imageWidth);
+    margin: 0 auto;
+    box-shadow: 0 0 8px 0px rgb(181, 192, 206);
+    border-radius: 1em;
+    transition: all 0.3s ease-in;
+}
+
+.image:hover {
+    cursor: pointer;
+    transform: scale(0.98);
+    transition: all 0.3s ease-out;
+}
+
+.image img {
+    width: var(--imageWidth);
+}
+
+.image-wrapper img {
+    transition: all 0.3s ease-in;
+}
+
+.image-wrapper img:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease-out;
+}
