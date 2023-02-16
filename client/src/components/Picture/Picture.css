@@ -1,6 +1,6 @@
 :root {
-    --imageWidth: 400px;
-    --imageHeight: 400px
+    --imageWidth: 475px;
+    --imageHeight: 475px
 }
 
 .image {
@@ -14,13 +14,17 @@
     transform-style: preserve-3d;
     will-change: transform;
 }
-
 .image:hover img {
     transform: scale(1.5);
 }
-
 .image img {
     width: var(--imageWidth);
     transform: scale(1);
     transition: transform 0.5s ease;
+}
+.image span {
+    display: block;
+    width: 100%;
+    text-align: right;
+    font-size: 12px;
 }

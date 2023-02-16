@@ -28,8 +28,10 @@ const Picture = memo((props) => {
 
     return (
         <>
+        {console.debug('rendered Picture')}
             <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler}>
                 <img src={`/src/assets/${props.imageName}`} alt={props.imageName}/>
+                <span>{props.imageDetail ? props.imageDetail : ''}</span>
             </div>
         </>
     )
