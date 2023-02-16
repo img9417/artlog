@@ -87,6 +87,7 @@ body {
   list-style: none;
   transition: all 0.3s;
   text-align: right;
+  margin: 12px 0;
 }
 
 .aside-right li.active {
