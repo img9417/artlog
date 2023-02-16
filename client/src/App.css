@@ -33,11 +33,22 @@ body {
 
 .aside-left {
   flex: 0.2;
+  z-index: 999;
 }
 
 .aside-left > p {
   transform: rotate(90deg);
   text-align: center;
+}
+.aside-left > p > a {
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+}
+.aside-left > p:hover {
+  color: black;
 }
 
 .border {
@@ -56,13 +67,17 @@ body {
 
 .aside-right {
   flex: 0.5;
-  max-height: 500px;
+  height: 500px;
   overflow-y: hidden;
-  scrollbar-width: 0;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 .aside-right ul {
-  padding: 1em 0;
+  padding: 2em 0;
+  max-height: 350px;
+  overflow: hidden;
 }
 
 .aside-right li {

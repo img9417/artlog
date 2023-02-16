@@ -106,10 +106,11 @@ const App = memo(() => {
   const [dateIndex, setDateIndex] = useState(0);
 
   useEffect(() => {
+    console.log("App Component useEffect");
     const x = document.querySelector(`li[name="${dates[dateIndex].name}"]`);
     x.classList.add('active');
     x.scrollIntoView();
-    setImageName(dates[dateIndex].name + '.png');
+    // setImageName(dates[dateIndex].name + '.png');
   }, [dateIndex])
 
   const onWheelHandler = (event) => {
@@ -131,7 +132,11 @@ const App = memo(() => {
     x = document.querySelector(`li[name="${dates[index].name}"]`);
     x.classList.add('active');
     setDateIndex(index);
-    setImageName(dates[index].name + '.png');
+  }
+
+  const onTransitionEndHandler = (e) => {
+    console.log(e);
+    setImageName(dates[dateIndex].name + '.png');
   }
 
   return (
@@ -140,13 +145,13 @@ const App = memo(() => {
     <span className='border'></span>
     <aside className='aside-left'>
       <p>
-        @rolemadelen
+        <a href="https://github.com/rolemadelen">@rolemadelen</a>
       </p>
     </aside>
     <main className="main-frame">
       <Picture imageName={imageName}/>
     </main>
-    <aside className="aside-right" onWheel={onWheelHandler}>
+    <aside className="aside-right" onWheel={onWheelHandler} onTransitionEnd={onTransitionEndHandler}>
       <ul>
         {dates.map((image, i) => (
           <li key={image + i} name={image.name}>{image.name}</li>
@@ -157,5 +162,6 @@ const App = memo(() => {
    </>
   )
 });
+App.displayName = 'App';
 
 export default App

@@ -10,5 +10,6 @@ const Picture = memo((props) => {
         </>
     )
 });
+Picture.displayName = 'Picture';
 
 export default Picture;
