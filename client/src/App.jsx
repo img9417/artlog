@@ -102,7 +102,7 @@ const dates = [
 ]
 
 const App = memo(() => {
-  const [imageName, setImageName] = useState('2023.02.13.png');
+  const [imageName, setImageName] = useState('');
   const [dateIndex, setDateIndex] = useState(0);
 
   useEffect(() => {
@@ -113,17 +113,25 @@ const App = memo(() => {
   }, [dateIndex])
 
   const onWheelHandler = (event) => {
-    const x = document.querySelector(`li[name="${dates[dateIndex].name}"]`);
-    x.classList.remove('active');
-
     let e = window.event || event;
     const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    let index = dateIndex;
+    let x = document.querySelector(`li[name="${dates[index].name}"]`);
+    
     if(delta > 0) {
-      setDateIndex((dateIndex + 1) % dates.length);
+      if(index === 0) return;
+      index -= 1;
+      x.classList.remove('active');
     } else {
-      let i = dateIndex - 1;
-      setDateIndex(i >= 0 ? i : dates.length - 1);
+      if(dateIndex === dates.length - 1) return;
+      index += 1;
+      x.classList.remove('active');
     }
+    
+    x = document.querySelector(`li[name="${dates[index].name}"]`);
+    x.classList.add('active');
+    setDateIndex(index);
+    setImageName(dates[index].name + '.png');
   }
 
   return (

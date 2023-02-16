@@ -12,6 +12,8 @@ body {
   background-color: #fffbf7;
   color: #777;
   scroll-behavior: smooth;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 #root {
@@ -20,6 +22,7 @@ body {
 
 .wrapper {
   margin: 0 auto;
+  padding: 0 1em;
   position: relative;
   display: flex;
   align-items: center;
@@ -34,15 +37,16 @@ body {
 
 .aside-left > p {
   transform: rotate(90deg);
+  text-align: center;
 }
 
 .border {
   display: block;
   border: 1px solid #b4afa88d;
-  width: 2em;
+  width: 2%;
   position: absolute;
-  top: 0;
   left: 5.3%;
+  transform: rotate(90deg);
 }
 
 
@@ -53,7 +57,12 @@ body {
 .aside-right {
   flex: 0.5;
   max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  scrollbar-width: 0;
+}
+
+.aside-right ul {
+  padding: 1em 0;
 }
 
 .aside-right li {
