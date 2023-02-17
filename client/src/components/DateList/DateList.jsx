@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
+import './DateList.scss';
 
 // assume these are in the DB
 const arts = [
@@ -231,11 +232,12 @@ const DateList = () => {
             list = document.querySelector(`li[name="${arts[index].date}"]`);
             list.classList.add('active');
             list.scrollIntoView({
+                behavior: 'auto',
                 block: 'center',
                 inline: 'center'
             })
             artIndex.current = index;
-        }, 50);
+        }, 100);
       }
 
       const onClickListHandler = (e) => {

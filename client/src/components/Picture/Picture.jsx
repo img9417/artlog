@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Picture.css";
+import "./Picture.scss";
 
 const Picture = (props) => {
     const onMouseMoveHandler = (e) => {

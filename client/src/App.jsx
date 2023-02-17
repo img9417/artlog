@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import './App.css'
+import './App.scss'
 import Picture from './components/Picture/Picture'
 import DateList from './components/DateList/DateList';
 
