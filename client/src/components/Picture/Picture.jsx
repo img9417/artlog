@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 import "./Picture.css";
 
-const Picture = memo((props) => {
+const Picture = (props) => {
     const onMouseMoveHandler = (e) => {
         const { clientX, clientY, currentTarget } = e;
         const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
@@ -28,14 +28,14 @@ const Picture = memo((props) => {
 
     return (
         <>
-        {console.debug('rendered Picture')}
+        {console.log('rendered Picture')}
             <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={props.onClick}>
-                <img src={`/src/assets/${props.imageName}`} alt={props.imageName}/>
+                <img src={`/src/assets/${props.imageName}`} alt={props.imageName} loading="lazy"/>
                 <span>{props.imageNote ? props.imageNote : ''}</span>
             </div>
         </>
     )
-});
+}
 Picture.displayName = 'Picture';
 
-export default Picture;
+export default React.memo(Picture);
