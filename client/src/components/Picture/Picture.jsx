@@ -16,7 +16,7 @@ const Picture = memo((props) => {
 
         card.style.transform =`
             perspective(${clientWidth}px) 
-            rotateX(${rotateY}deg) 
+            rotateX(${rotateY}deg)
             rotateY(${rotateX}deg) 
             scale3d(1, 1, 1)
         `;
@@ -29,9 +29,9 @@ const Picture = memo((props) => {
     return (
         <>
         {console.debug('rendered Picture')}
-            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler}>
+            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={props.onClick}>
                 <img src={`/src/assets/${props.imageName}`} alt={props.imageName}/>
-                <span>{props.imageDetail ? props.imageDetail : ''}</span>
+                <span>{props.imageNote ? props.imageNote : ''}</span>
             </div>
         </>
     )

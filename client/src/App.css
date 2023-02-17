@@ -69,12 +69,21 @@ body {
   justify-content: right;
   align-items: center;
 }
+.aside-right .location,
+.aside-right .day {
+  display: none;
+  font-size: 0;
+}
+.aside-right .day {
+  right: 60%;
+}
 .aside-right ul {
-  padding: 2em 0;
+  padding: 2em;
   height: 80vh;
   overflow: hidden;
 }
 .aside-right li {
+  position: relative;
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.5em;
   font-weight: bolder;
@@ -86,12 +95,42 @@ body {
 
 .aside-right li:hover {
   cursor: pointer;
+  font-size: 1.6em;
   color: black;
 }
 
 .aside-right li.active {
   font-size: 4em;
   color: black;
+}
+/* .aside-right li.active .location,
+.aside-right li.active .day {
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  transition: all 0.3s ease;
+} */
+.aside-right li.active .location {
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  top: 0;
+}
+.aside-right li.active .day {
+  position: absolute;
+  right: -6%;
+  bottom: 45%;
+
+  display: inline-block;
+  padding: 1px 5px;
+
+  /* color: white; */
+  font-size: 12px;
+  letter-spacing: 1px;
+
+  transform: rotateZ(90deg);
+  /* backdrop-filter: invert(1); */
 }
 
 @media (prefers-reduced-motion: no-preference) {
