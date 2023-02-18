@@ -44,10 +44,13 @@ const Picture = () => {
 
     return (
         <>
-        {console.log('rendered Picture')}
+            {console.debug('rendered Picture')}
             <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={onClickHandler}>
                 <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/>
                 <span>{imageNote}</span>
+                {imageCupless && (
+                    <span className="cupless-symbol">🗝️</span>
+                )}
             </div>
         </>
     )

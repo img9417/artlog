@@ -28,5 +28,13 @@ $imageHeight: 475px;
         width: 100%;
         text-align: right;
         font-size: 12px;
+
+        &.cupless-symbol {
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            top: 1%;
+            right: 3%;
+        }
     }
 }

@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useLayoutEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { update } from '../../_reducers/artSlice';
 import './DateList.scss';
@@ -199,25 +199,13 @@ const arts = [
 const DateList = () => {
     const dispatch = useDispatch();
     let artIndex = useRef(0);
+    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
     useEffect(() => {
-      const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-      arts.forEach(art => {
-        art['day'] = days[new Date(art.name).getDay()];
-      })
-
+      const list = document.querySelector(`li[name="${arts[artIndex.current].name}"]`);
+      list.classList.add("active");
       dispatch(update(arts[0]));
     }, [])
-
-    useEffect(() => {
-        const list = document.querySelector(`li[name="${arts[artIndex.current].name}"]`);
-        list.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
-        list.classList.add('active');
-    }, [artIndex.current])
 
     const onWheelHandler = (event) => {
         let e = window.event || event;
@@ -246,7 +234,7 @@ const DateList = () => {
             })
             artIndex.current = index;
             dispatch(update(arts[artIndex.current]));
-          }, 100);
+          }, 50);
       }
 
       const onClickListHandler = (e) => {
@@ -268,18 +256,19 @@ const DateList = () => {
     
     return (
         <>
-        {console.debug("Render DateList")}
-            <aside className="aside-right" onWheel={onWheelHandler}>
-            <ul>
-                {arts.map((art, i) => (
+          {console.debug("Render DateList")}
+          <aside className="aside-right" onWheel={onWheelHandler}>
+          <ul>
+              {arts.map((art, i) => (
                 <li key={art + i} name={art.name} data-index={i} onClick={onClickListHandler}>
-                    <span className="location">📍{arts[i].location}</span>
-                    <span className="day">{arts[i].day}</span>
+                    <span className="location">📍{art.location}</span>
+                    {/* <span className="day">{art.day}</span> */}
+                    <span className="day">{days[new Date(art.name).getDay()]}</span>
                     {art.name}
                 </li>
-                ))}
-            </ul>
-            </aside>
+              ))}
+          </ul>
+          </aside>
         </>
     )
 }

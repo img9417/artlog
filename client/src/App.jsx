@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import './App.scss'
 import Picture from './components/Picture/Picture'
 import DateList from './components/DateList/DateList';
