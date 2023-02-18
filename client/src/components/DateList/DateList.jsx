@@ -1,4 +1,6 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
+import { useDispatch } from 'react-redux';
+import { update } from '../../_reducers/artSlice';
 import './DateList.scss';
 
 // assume these are in the DB
@@ -196,7 +198,8 @@ const arts = [
     else return -1;
 });
 
-const DateList = (props) => {
+const DateList = () => {
+    const dispatch = useDispatch();
     let artIndex = useRef(0);
 
     useEffect(() => {
@@ -204,6 +207,8 @@ const DateList = (props) => {
       arts.forEach(art => {
         art['day'] = days[new Date(art.date).getDay()];
       })
+
+      dispatch(update(arts[0]));
     }, [])
 
     useEffect(() => {
@@ -242,7 +247,7 @@ const DateList = (props) => {
                 inline: 'center'
             })
             artIndex.current = index;
-            props.onDataChange(arts[artIndex.current]);
+            dispatch(update(arts[artIndex.current]));
           }, 100);
       }
 
@@ -260,8 +265,7 @@ const DateList = (props) => {
         })
 
         artIndex.current = listIndex;
-
-        props.onDataChange(arts[artIndex.current]);
+        dispatch(update(arts[artIndex.current]));
       }
     
     return (

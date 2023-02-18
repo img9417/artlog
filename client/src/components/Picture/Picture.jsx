@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import "./Picture.scss";
 
-const Picture = (props) => {
+const Picture = () => {
+    const imageName = useSelector((state) => state.art.name);
+    const imageNote = useSelector((state) => state.art.note);
+  
     const onMouseMoveHandler = (e) => {
         const { clientX, clientY, currentTarget } = e;
         const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
@@ -29,9 +33,9 @@ const Picture = (props) => {
     return (
         <>
         {console.log('rendered Picture')}
-            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={props.onClick}>
-                <img src={`/src/assets/${props.imageName}`} alt={props.imageName} loading="lazy"/>
-                <span>{props.imageNote ? props.imageNote : ''}</span>
+            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler}>
+                <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/>
+                <span>{imageNote}</span>
             </div>
         </>
     )
