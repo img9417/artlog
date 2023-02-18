@@ -7,6 +7,11 @@ const App = () => {
   const [imageName, setImageName] = useState('2023.02.16.png');
   const [imageNote, setImageNote] = useState('Lorem Ipsum'); 
 
+  const onDataChangeHandler = (art) => {
+    setImageName(art.date + '.png');
+    setImageNote(art.note);
+  }
+
   return (
    <>
    <div className="wrapper">
@@ -19,7 +24,7 @@ const App = () => {
     <main className="main-frame">
       <Picture imageName={imageName} imageNote={imageNote}/>
     </main>
-    <DateList/>
+    <DateList onDataChange={onDataChangeHandler}/>
    </div>
    </>
   )

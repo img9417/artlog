@@ -119,7 +119,7 @@ const arts = [
     {
       date: '2022.12.14',
       location: 'Hiratsuka, Oshima',
-      note: "SHEIN Roundneck Sweatshirt | SHEIN Stripe Sweatshirt | SHEIN Drawstring Pants"
+      note: "SHEIN Roundneck Pullover | SHEIN Stripe Sweatshirt | SHEIN Drawstring Pants"
     },
     {
       date: '2022.12.15',
@@ -129,7 +129,7 @@ const arts = [
     {
       date: '2022.12.16',
       location: 'Hiratsuka, Oshima',
-      note: "KOGARASHI Check Pattern Trench Coat | 🤔 Long-sleeve Button Up | 🤔 Straight Jean"
+      note: "KOGARASHI Check Pattern Trench Coat | 🤔 Long-sleeve Button Up | 🤔 Slim Fit Straight Jean"
     },
     {
       date: '2022.12.17',
@@ -144,7 +144,7 @@ const arts = [
     {
       date: '2022.12.19',
       location: 'Hiratsuka, Oshima',
-      note: "MUJI Waterproof Jacket | 🤔 Button Up Shirt | 🤔 Straight Jean"
+      note: "MUJI Waterproof Jacket | DAZY Roundneck Tshirt | 🤔 Regular Fit Jean"
     },
     {
       date: '2022.12.20',
@@ -196,15 +196,20 @@ const arts = [
     else return -1;
 });
 
-const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
-const DateList = () => {
+const DateList = (props) => {
     let artIndex = useRef(0);
+
+    useEffect(() => {
+      const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      arts.forEach(art => {
+        art['day'] = days[new Date(art.date).getDay()];
+      })
+    }, [])
 
     useEffect(() => {
         const list = document.querySelector(`li[name="${arts[artIndex.current].date}"]`);
         list.scrollIntoView({
-            behavior: 'auto',
+            behavior: 'smooth',
             block: 'center',
             inline: 'center'
         });
@@ -237,7 +242,8 @@ const DateList = () => {
                 inline: 'center'
             })
             artIndex.current = index;
-        }, 100);
+            props.onDataChange(arts[artIndex.current]);
+          }, 100);
       }
 
       const onClickListHandler = (e) => {
@@ -254,16 +260,9 @@ const DateList = () => {
         })
 
         artIndex.current = listIndex;
-      }
 
-    const getDays = () => {
-        if (arts[artIndex.current].day) {
-            return arts[artIndex.current].day;
-        } else {
-            arts[artIndex.current]['day'] = days[new Date(arts[artIndex.current].date).getDay()];
-            return arts[artIndex.current].day;
-        }
-    }
+        props.onDataChange(arts[artIndex.current]);
+      }
     
     return (
         <>
@@ -272,8 +271,8 @@ const DateList = () => {
             <ul>
                 {arts.map((art, i) => (
                 <li key={art + i} name={art.date} data-index={i} onClick={onClickListHandler}>
-                    <span className="location">📍{arts[artIndex.current].location}</span>
-                    <span className="day">{getDays()}</span>
+                    <span className="location">📍{arts[i].location}</span>
+                    <span className="day">{arts[i].day}</span>
                     {art.date}
                 </li>
                 ))}
