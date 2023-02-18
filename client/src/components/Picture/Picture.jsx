@@ -1,11 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { update } from '../../_reducers/artSlice';
 import "./Picture.scss";
 
 const Picture = () => {
     const imageName = useSelector((state) => state.art.name);
     const imageNote = useSelector((state) => state.art.note);
-  
+    const imageCupless = useSelector((state) => state.art.cupless);
+    const dispatch = useDispatch();
+
     const onMouseMoveHandler = (e) => {
         const { clientX, clientY, currentTarget } = e;
         const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
@@ -30,10 +33,19 @@ const Picture = () => {
         e.currentTarget.style.transform = `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
     }
 
+    const onClickHandler = (e) => {
+        if(imageCupless) {
+            dispatch(update({
+                name: imageCupless.name,
+                note: imageNote,
+            }))
+        }
+    }
+
     return (
         <>
         {console.log('rendered Picture')}
-            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler}>
+            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={onClickHandler}>
                 <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/>
                 <span>{imageNote}</span>
             </div>

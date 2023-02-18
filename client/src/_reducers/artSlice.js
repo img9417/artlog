@@ -4,12 +4,14 @@ export const artSlice = createSlice({
     name: 'art',
     initialState: {
         name: '',
-        note: ''
+        note: '',
+        cupless: undefined,
     },
     reducers: {
         update: (state, action) => {
-            state.name = action.payload.date + '.png';
+            state.name = action.payload.name + '.png';
             state.note = action.payload.note;
+            state.cupless = action.payload.cupless;
         },
     }
 })
