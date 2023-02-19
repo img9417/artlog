@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "frontend": "pnpm run dev --prefix client",
+    "backend": "pnpm run dev --prefix server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "rolemadelen",
   "license": "ISC"
 }
