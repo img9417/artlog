@@ -6,6 +6,11 @@ import './DateList.scss';
 // assume these are in the DB
 const arts = [
     {
+      name: '2023.02.18',
+      location: 'Hiratsuka, Oshima',
+      note: 'SHEIN Roundneck Graphic Pullover | UNIQLO Airism Tshirt | DEMON HUNTER Stretch Jean'
+    },
+    {
       name: '2023.02.16',
       location: 'Hiratsuka, Oshima',
       note: 'LUCKY CHARM Turtleneck Sweater | 🤔 Regular Fit Pants'

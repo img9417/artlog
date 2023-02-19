@@ -49,7 +49,7 @@ const Picture = () => {
                 <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/>
                 <span>{imageNote}</span>
                 {imageCupless && (
-                    <span className="cupless-symbol">🗝️</span>
+                    <span className="cupless-symbol"> 🗝️</span>
                 )}
             </div>
         </>
