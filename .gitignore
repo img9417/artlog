@@ -12,7 +12,8 @@ dist
 dist-ssr
 *.local
 
-*-lock*
+pnpm-lock.yaml
+artlist.js 
 
 # Editor directories and files
 .vscode/*

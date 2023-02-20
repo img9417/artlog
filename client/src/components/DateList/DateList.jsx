@@ -17,7 +17,7 @@ const DateList = () => {
     }, [])
 
     useEffect(() => {
-      const list = document.querySelector(`li[name="${arts[artIndex.current]?.name}"]`);
+      const list = document.querySelector(`li[name="${arts[artIndex.current]?.date}"]`);
       if(list) {
         list.classList.add("active");
         dispatch(update(arts[0]));
@@ -29,7 +29,7 @@ const DateList = () => {
         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
         let index = artIndex.current;
         // grab current active list - showing art
-        let list = document.querySelector(`li[name="${arts[index].name}"]`);
+        let list = document.querySelector(`li[name="${arts[index].date}"]`);
         
         if(delta > 0) {
             if(index === 0) return;
@@ -42,7 +42,7 @@ const DateList = () => {
         setTimeout(() => {
             list.classList.remove('active');
             // grab the new list (index updated)
-            list = document.querySelector(`li[name="${arts[index].name}"]`);
+            list = document.querySelector(`li[name="${arts[index].date}"]`);
             list.classList.add('active');
             list.scrollIntoView({
                 behavior: 'auto',
@@ -80,8 +80,8 @@ const DateList = () => {
                 <li key={art + i} name={art.name} data-index={i} onClick={onClickListHandler}>
                     <span className="location">📍{art.location}</span>
                     <span className="day">{art.day}</span>
-                    <span className="day">{days[new Date(art.name).getDay()]}</span>
-                    {art.name}
+                    <span className="day">{days[new Date(art.date).getDay()]}</span>
+                    {art.date}
                 </li>
               ))}
           </ul>

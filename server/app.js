@@ -2,9 +2,16 @@ const express = require('express');
 const app = express();
 const port = 5174;
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { Art } = require("./models/art");
 const cors = require('cors');
 
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(cookieParser());
 app.use(cors());
 
 mongoose.set('strictQuery', false);
@@ -25,12 +32,25 @@ app.get('/artslist', (req, res) => {
         });
 
         artsMap.sort((a, b) => {
-            if(a.name < b.name) return 1;
+            if(a.date < b.date) return 1;
             else return -1;
         })
 
         res.send(artsMap);
     })
+})
+
+app.post('/api/insert', (req, res) => {
+    const art = new Art(req.body);
+    console.log("server: art: ");
+    console.log(art);
+
+    art.save((err, artInfo) => {
+        if(err) return res.json({success: false, err});
+        return res.status(200).json({
+            success: true
+        })
+    });
 })
 
 app.listen(port, () => {

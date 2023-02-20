@@ -8,7 +8,8 @@ const artSchema = new Schema ({
     location: String,
     cupless: {
         name: String
-    }
+    },
+    base64img: String
 })
 
 module.exports = {artSchema};

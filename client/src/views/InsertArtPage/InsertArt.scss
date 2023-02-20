@@ -40,7 +40,7 @@
         flex: 1;
         padding: 0 1em;
 
-        input {
+        & > input {
             width: 100%;
             border: none;
             border-bottom: 1px solid #ccc;
@@ -51,7 +51,7 @@
             }
         }
 
-        label {
+        & > label {
             text-align: left;
             width: 100%;
             margin-bottom: 1rem;
@@ -66,6 +66,22 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 4em;
             font-weight: bold;
+        }
+
+        .cupless-checkbox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            & > label {
+                margin-right: 1rem;
+            }
+
+            & > input {
+                cursor: pointer;
+                width: 25px;
+                height: 25px;
+            }
         }
     }
 }

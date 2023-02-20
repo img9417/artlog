@@ -1,12 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { update } from '../../_reducers/artSlice';
+import { Buffer } from 'buffer';
 import "./Picture.scss";
 
 const Picture = () => {
     const imageName = useSelector((state) => state.art.name);
     const imageNote = useSelector((state) => state.art.note);
     const imageCupless = useSelector((state) => state.art.cupless);
+    const base64img = useSelector((state) => state.art.base64img);
     const dispatch = useDispatch();
 
     const onMouseMoveHandler = (e) => {
@@ -34,7 +36,7 @@ const Picture = () => {
     }
 
     const onClickHandler = (e) => {
-        if(imageCupless) {
+        if(imageCupless?.name) {
             dispatch(update({
                 name: imageCupless.name,
                 note: imageNote,
@@ -42,13 +44,34 @@ const Picture = () => {
         }
     }
 
+    const handleBase64Image = () => {
+        if(base64img) {
+            const byteString = Buffer.from(base64img.split(",")[1], "base64");
+
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString[i];
+            }
+            const blob = new Blob([ia], {
+                type: "image/png"
+            });
+            const file = new File([blob], "image.png");
+    
+            return URL.createObjectURL(file);
+        } else {
+            return '';
+        }
+    }
+
     return (
         <>
             {console.debug('rendered Picture')}
             <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={onClickHandler}>
-                <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/>
+                {/* <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/> */}
+                <img src={handleBase64Image()} alt={imageName} loading="lazy"/>
                 <span>{imageNote}</span>
-                {imageCupless && (
+                {imageCupless?.name && (
                     <span className="cupless-symbol"> 🗝️</span>
                 )}
             </div>
