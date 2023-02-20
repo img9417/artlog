@@ -42,14 +42,27 @@ app.get('/artslist', (req, res) => {
 
 app.post('/api/insert', (req, res) => {
     const art = new Art(req.body);
-    console.log("server: art: ");
-    console.log(art);
-
+    
     art.save((err, artInfo) => {
         if(err) return res.json({success: false, err});
         return res.status(200).json({
             success: true
         })
+    });
+})
+
+app.post('/api/edit', (req, res) => {
+    Art.findOneAndUpdate({_id: req.body._id}, {$set: req.body}, {new: true}, (err, art) => {
+        if(!art) {
+            return res.json({
+                message: "No art found."
+            })
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "art updated."
+            })
+        }
     });
 })
 

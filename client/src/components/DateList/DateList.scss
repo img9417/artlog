@@ -31,7 +31,7 @@
         font-weight: bolder;
         list-style: none;
 
-        transition: all 0.5s;
+        transition: font-size 0.3s;
 
         &:hover {
           cursor: pointer;
@@ -55,7 +55,7 @@
       display: inline-block;
       font-size: 12px;
 
-      transition: all 0.5s ease;
+      transition: font-size 0.3s;
     }
 
     .day {

@@ -1,15 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { update } from '../../_reducers/artSlice';
+import { useSelector } from 'react-redux';
 import { Buffer } from 'buffer';
 import "./Picture.scss";
 
 const Picture = () => {
-    const imageName = useSelector((state) => state.art.name);
-    const imageNote = useSelector((state) => state.art.note);
-    const imageCupless = useSelector((state) => state.art.cupless);
-    const base64img = useSelector((state) => state.art.base64img);
-    const dispatch = useDispatch();
+    const { name, note, base64img } = useSelector(state => state.art);
 
     const onMouseMoveHandler = (e) => {
         const { clientX, clientY, currentTarget } = e;
@@ -35,15 +30,6 @@ const Picture = () => {
         e.currentTarget.style.transform = `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
     }
 
-    const onClickHandler = (e) => {
-        if(imageCupless?.name) {
-            dispatch(update({
-                name: imageCupless.name,
-                note: imageNote,
-            }))
-        }
-    }
-
     const handleBase64Image = () => {
         if(base64img) {
             const byteString = Buffer.from(base64img.split(",")[1], "base64");
@@ -67,13 +53,9 @@ const Picture = () => {
     return (
         <>
             {console.debug('rendered Picture')}
-            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler} onClick={onClickHandler}>
-                {/* <img src={`/src/assets/${imageName}`} alt={imageName} loading="lazy"/> */}
-                <img src={handleBase64Image()} alt={imageName} loading="lazy"/>
-                <span>{imageNote}</span>
-                {imageCupless?.name && (
-                    <span className="cupless-symbol"> 🗝️</span>
-                )}
+            <div className="image" onMouseMove={onMouseMoveHandler} onMouseLeave={onMouseLeaveHandler}>
+                <img src={handleBase64Image()} alt={name} loading="lazy"/>
+                <span>{note}</span>
             </div>
         </>
     )

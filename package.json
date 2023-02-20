@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "frontend": "pnpm run dev --prefix client",
-    "backend": "pnpm run dev --prefix server",
+    "frontend": "npm run dev --prefix client",
+    "backend": "npm run start --prefix server",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "rolemadelen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }

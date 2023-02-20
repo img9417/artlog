@@ -67,7 +67,8 @@ input {
 }
 
 .aside-left {
-  .add-button {
+  .add-button,
+  .edit-button {
     margin-right: 3rem;
     transform: scale(1);
     transition: transform 0.3s;

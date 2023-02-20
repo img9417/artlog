@@ -1,8 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { update } from '../../_reducers/artSlice';
-import './DateList.scss';
 import axios from 'axios';
+import './DateList.scss';
 
 const DateList = () => {
     const dispatch = useDispatch();
