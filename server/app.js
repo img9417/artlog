@@ -46,8 +46,24 @@ app.post('/api/insert', (req, res) => {
     art.save((err, artInfo) => {
         if(err) return res.json({success: false, err});
         return res.status(200).json({
-            success: true
+            success: true,
+            id: artInfo._id
         })
+    });
+})
+
+app.post('/api/delete', (req, res) => {
+    Art.findOneAndDelete({_id: req.body._id}, (err, art) => {
+        if(!art) {
+            return res.json({
+                message: "No art found."
+            })
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "art deleted."
+            })
+        }
     });
 })
 
@@ -60,7 +76,8 @@ app.post('/api/edit', (req, res) => {
         } else {
             return res.status(200).json({
                 success: true,
-                message: "art updated."
+                message: "art updated.",
+                id: art._id
             })
         }
     });

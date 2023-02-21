@@ -27,6 +27,14 @@
     border-radius: 5px;
     display: flex;
 
+    &.delete {
+        // position: absolute;
+        margin: 12rem auto 0 auto;
+        top: 50%;
+        left: 50%;
+        width: 20rem;
+        height: 20%;
+    }
     .art-form-zone {
         flex: 1;
         width: 500px;

@@ -62,4 +62,6 @@ const Dropzone = () => {
   );
 }
 
+Dropzone.displayName = 'Dropzone';
+
 export default React.memo(Dropzone);

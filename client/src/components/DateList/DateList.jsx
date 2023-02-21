@@ -1,35 +1,35 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { update } from '../../_reducers/artSlice';
-import axios from 'axios';
 import './DateList.scss';
 
-const DateList = () => {
+const DateList = (props) => {
     const dispatch = useDispatch();
     const [arts, setArts] = useState([]);
     let artIndex = useRef(0);
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
     useEffect(() => {
-      axios.get("http://localhost:5174/artslist").then(res => {
-          setArts(res.data);
-    });
-    }, [])
-
+      setArts(props.arts);
+    }, [props.arts])
+    
     useEffect(() => {
-      const list = document.querySelector(`li[name="${arts[artIndex.current]?.date}"]`);
+      const list = document.querySelector(`li[data-index="${artIndex.current}"]`);
       if(list) {
         list.classList.add("active");
-        dispatch(update(arts[0]));
+        dispatch(update(arts[artIndex.current]));
       }
     }, [arts])
 
     const onWheelHandler = (event) => {
         let e = window.event || event;
         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+        if(artIndex.current === arts.length) {
+          artIndex.current = artIndex.current - 1;
+        }
         let index = artIndex.current;
         // grab current active list - showing art
-        let list = document.querySelector(`li[name="${arts[index].date}"]`);
+        let list = document.querySelector(`li[data-index="${artIndex.current}"]`);
         
         if(delta > 0) {
             if(index === 0) return;
@@ -55,18 +55,23 @@ const DateList = () => {
       }
 
       const onClickListHandler = (e) => {
-        const listIndex = parseInt(e.currentTarget.dataset.index);
+        let listIndex = parseInt(e.currentTarget.dataset.index);
         if(artIndex.current === listIndex) return;
+
+        if(artIndex.current === arts.length) {
+          artIndex.current = listIndex;
+        }
         
-        document.querySelector(`li[name="${arts[artIndex.current].name}"]`).classList.remove('active');
-        let list = document.querySelector(`li[name="${arts[listIndex].name}"]`);
+        document.querySelector(`li[data-index="${artIndex.current}"]`).classList.remove('active');
+        let list = document.querySelector(`li[data-index="${listIndex}"]`);
+        console.log(list);
         list.classList.add('active');
         list.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'center'
         })
-
+        
         artIndex.current = listIndex;
         dispatch(update(arts[artIndex.current]));
       }
