@@ -2,7 +2,7 @@
 
 This is an application to log my daily outfit drawings.
 
-![Demo](./demo.gif)
+![Sample](./sample.jpg)
 
 ## Tech Stack
 - Database
