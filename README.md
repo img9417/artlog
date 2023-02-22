@@ -1,6 +1,6 @@
 # Art Log
 
-This is an application to log my daily outfit drawings.
+Artlog is an app to log my daily (outfit) drawings.
 
 ![Sample](./sample.jpg)
 
