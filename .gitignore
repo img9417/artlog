@@ -16,6 +16,8 @@ pnpm-lock.yaml
 artlist.js 
 .env
 
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

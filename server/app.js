@@ -6,16 +6,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { Art } = require("./models/art");
 const cors = require('cors');
+require('dotenv').config()
 
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser());
 app.use(cors());
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/artlog', {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -86,3 +85,5 @@ app.post('/api/edit', (req, res) => {
 app.listen(port, () => {
     console.log(`App is listening at port ${port}`);
 })
+
+module.exports = app;
