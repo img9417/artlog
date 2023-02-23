@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Buffer } from 'buffer';
 import "./Picture.scss";
+import { RootState } from '../../store';
 
 const Picture = () => {
-    const { name, note, base64img } = useSelector(state => state.art);
+    const { name, note, base64img } = useSelector((state: RootState) => state.art);
 
     const onMouseMoveHandler = (e) => {
         const { clientX, clientY, currentTarget } = e;

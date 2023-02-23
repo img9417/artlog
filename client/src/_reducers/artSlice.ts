@@ -34,4 +34,6 @@ export const artSlice = createSlice({
 
 export const { update, storeBase64Image, saveListOfArts } = artSlice.actions;
 
+export type IRootType = ReturnType<typeof artSlice.reducer>;
+
 export default artSlice.reducer;

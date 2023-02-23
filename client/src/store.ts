@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import artReducer from './_reducers/artSlice';
 
-export default configureStore({
+const store =  configureStore({
     reducer: {
         art: artReducer,
     },
@@ -9,3 +9,7 @@ export default configureStore({
         serializableCheck: false
     }),
 })
+
+export type RootState = ReturnType<typeof store.getState>
+
+export default store

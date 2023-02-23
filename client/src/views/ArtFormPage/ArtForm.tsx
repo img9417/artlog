@@ -1,16 +1,25 @@
-import Dropzone from '../../components/Dropzone/Dropzone';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { update } from '../../_reducers/artSlice';
-import './ArtForm.scss';
-import { useEffect, useState, memo } from 'react';
+import axios from 'axios';
 
-const ArtForm = memo((props) => {
+import Dropzone from '../../components/Dropzone/Dropzone';
+import { update } from '../../_reducers/artSlice';
+import { Art } from '../../interface';
+import { RootState } from '../../store';
+
+import './ArtForm.scss';
+
+interface Props {
+    operationType: string,
+    onUpdateArts: (artInfo: Art, id: string) => void,
+}
+
+const ArtForm = (props: Props) => {
     const dispatch = useDispatch();
-    const { date, note, location, base64img, _id } = useSelector(state => state.art);
-    const [imageDate, setImageDate] = useState();
-    const [imageNote, setImageNote] = useState('');
-    const [imageLocation, setImageLocation] = useState('');
+    const { date, note, location, base64img, _id } = useSelector((state: RootState) => state.art);
+    const [imageDate, setImageDate] = useState<string>();
+    const [imageNote, setImageNote] = useState<string>('');
+    const [imageLocation, setImageLocation] = useState<string>('');
     
     useEffect(() => {
         setImageDate(date);
@@ -25,18 +34,19 @@ const ArtForm = memo((props) => {
             axios.post("http://localhost:5174/api/delete", {_id: _id})
             .then(res => {
                 if(res.data.success) {
-                    props.onUpdateArts(null, _id);
+                    props.onUpdateArts(res.data, _id);
                 }
             })
             return;
         }
 
-        const artInfo = {
+        const artInfo: Art = {
             location: e.target[0].value,
             name: e.target[1].value,
             date: e.target[1].value,
             note: e.target[2].value,
-            base64img
+            base64img,
+            _id: undefined
         }
 
         if(artInfo.note === '' || artInfo.location === '' || artInfo.date === '') return;
@@ -128,8 +138,8 @@ const ArtForm = memo((props) => {
             </div>
         </>
     )
-})
+}
 
 ArtForm.displayName = "ArtForm";
 
-export default ArtForm;
+export default React.memo(ArtForm);

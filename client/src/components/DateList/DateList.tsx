@@ -2,11 +2,16 @@ import React, {useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { update } from '../../_reducers/artSlice';
 import './DateList.scss';
+import { Art } from '../../interface';
 
-const DateList = (props) => {
+interface Props {
+  arts: Array<Art>;
+}
+
+const DateList = (props: Props) => {
     const dispatch = useDispatch();
-    const [arts, setArts] = useState([]);
-    let artIndex = useRef(0);
+    const [arts, setArts] = useState<Array<Art>>([]);
+    let artIndex = useRef<number>(0);
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
     useEffect(() => {
@@ -14,77 +19,70 @@ const DateList = (props) => {
     }, [props.arts])
     
     useEffect(() => {
-      const list = document.querySelector(`li[data-index="${artIndex.current}"]`);
-      if(list) {
-        list.classList.add("active");
-        dispatch(update(arts[artIndex.current]));
-      }
+      const list: HTMLElement | null = document.querySelector(`li[data-index="${artIndex.current}"]`);
+      if(!list) return;
+
+      list.classList.add("active");
+      dispatch(update(arts[artIndex.current]));
     }, [arts])
 
-    const onWheelHandler = (event) => {
+    const onWheelHandler = (event): void => {
         let e = window.event || event;
         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
         if(artIndex.current === arts.length) {
           artIndex.current = artIndex.current - 1;
         }
         let index = artIndex.current;
-        // grab current active list - showing art
-        let list = document.querySelector(`li[data-index="${artIndex.current}"]`);
         
         if(delta > 0) {
-            if(index === 0) return;
-            index -= 1;
+          if(index === 0) return;
+          index -= 1;
         } else {
-            if(index === arts.length - 1) return;
-            index += 1;
+          if(index === arts.length - 1) return;
+          index += 1;
         }
-
+        
         setTimeout(() => {
-            list.classList.remove('active');
-            // grab the new list (index updated)
-            list = document.querySelector(`li[name="${arts[index].date}"]`);
-            list.classList.add('active');
-            list.scrollIntoView({
-                behavior: 'auto',
-                block: 'center',
-                inline: 'center'
-            })
-            artIndex.current = index;
+            toggleDate(index, "auto");
             dispatch(update(arts[artIndex.current]));
           }, 50);
       }
 
-      const onClickListHandler = (e) => {
+      const onClickListHandler = (e): void => {
         let listIndex = parseInt(e.currentTarget.dataset.index);
         if(artIndex.current === listIndex) return;
 
         if(artIndex.current === arts.length) {
           artIndex.current = listIndex;
         }
-        
-        document.querySelector(`li[data-index="${artIndex.current}"]`).classList.remove('active');
-        let list = document.querySelector(`li[data-index="${listIndex}"]`);
-        console.log(list);
-        list.classList.add('active');
-        list.scrollIntoView({
-          behavior: 'smooth',
+
+        toggleDate(listIndex, "smooth");
+        dispatch(update(arts[artIndex.current]));
+      }
+    
+      const toggleDate = (index: number, behavior: ScrollBehavior): void => {
+        let list = document.querySelector(`li[data-index="${artIndex.current}"]`);
+        list?.classList.remove('active');
+
+        list = document.querySelector(`li[data-index="${index}"]`);
+        list?.classList.add('active');
+        list?.scrollIntoView({
+          behavior,
           block: 'center',
           inline: 'center'
         })
         
-        artIndex.current = listIndex;
-        dispatch(update(arts[artIndex.current]));
+        artIndex.current = index;
       }
-    
+
     return (
         <>
           {console.debug("Render DateList")}
           <aside className="aside-right" onWheel={onWheelHandler}>
           <ul>
               {arts.map((art, i) => (
-                <li key={art + i} name={art.name} data-index={i} onClick={onClickListHandler}>
+                <li key={art.base64img + i} data-name={art.name} data-index={i} onClick={onClickListHandler}>
                     <span className="location">📍{art.location}</span>
-                    <span className="day">{art.day}</span>
                     <span className="day">{days[new Date(art.date).getDay()]}</span>
                     {art.date}
                 </li>

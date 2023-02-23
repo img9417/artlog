@@ -8,7 +8,7 @@ import "./Dropzone.scss";
 
 const Dropzone = () => {
     const dispatch = useDispatch();
-    const [imagePath, setImagePath] = useState('');
+    const [imagePath, setImagePath] = useState<string>('');
     const {
         acceptedFiles,
         getRootProps,
