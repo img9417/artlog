@@ -83,7 +83,7 @@ app.post('/api/edit', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`App is listening at port ${port}`);
+    console.log(`App is running on port ${port}`);
 })
 
 module.exports = app;
