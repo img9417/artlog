@@ -31,8 +31,8 @@ const App = () => {
   const [arts, setArts] = useState<Array<Art>>([]);
 
   useEffect((): void => {
-    axios.post("/api/artslist").then(res => {
-      setArts(res.data.arts);
+    axios.get("/api/artslist").then(res => {
+      setArts(res.data);
     });
   }, [])
 
