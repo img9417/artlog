@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     res.send("Hello");
 })
 
-app.get('/api/artslist', (req, res) => {
+app.get('/artslist', (req, res) => {
     Art.find({}, (err, arts) => {
         let artsMap = [];
         arts.forEach(art => {
