@@ -31,7 +31,7 @@ const App = () => {
   const [arts, setArts] = useState<Array<Art>>([]);
 
   useEffect((): void => {
-    axios.get("/artslist").then(res => {
+    axios.get("http://localhost:5174/artslist").then(res => {
       setArts(res.data);
     });
   }, [])
