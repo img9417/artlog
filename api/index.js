@@ -19,10 +19,12 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 });
 
+app.get('/', (req, res) => {
+    res.send("Hello");
+})
+
 app.get('/api/artslist', (req, res) => {
     Art.find({}, (err, arts) => {
-        if(err) return res.status(400).json({success: false, err});
-        
         let artsMap = [];
         arts.forEach(art => {
             artsMap.push({...art._doc});
@@ -33,7 +35,7 @@ app.get('/api/artslist', (req, res) => {
             else return -1;
         })
 
-        res.status(200).send(artsMap);
+        res.send(artsMap);
     })
 })
 
@@ -41,7 +43,7 @@ app.post('/api/insert', (req, res) => {
     const art = new Art(req.body);
     
     art.save((err, artInfo) => {
-        if(err) return res.status(400).json({success: false, err});
+        if(err) return res.json({success: false, err});
         return res.status(200).json({
             success: true,
             id: artInfo._id
@@ -52,7 +54,7 @@ app.post('/api/insert', (req, res) => {
 app.post('/api/delete', (req, res) => {
     Art.findOneAndDelete({_id: req.body._id}, (err, art) => {
         if(!art) {
-            return res.status(400).json({
+            return res.json({
                 message: "No art found."
             })
         } else {
@@ -67,7 +69,7 @@ app.post('/api/delete', (req, res) => {
 app.post('/api/edit', (req, res) => {
     Art.findOneAndUpdate({_id: req.body._id}, {$set: req.body}, {new: true}, (err, art) => {
         if(!art) {
-            return res.status(400).json({
+            return res.json({
                 message: "No art found."
             })
         } else {
