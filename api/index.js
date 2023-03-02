@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 });
 
-app.get('/api/artslist', (req, res) => {
+app.post('/api/artslist', (req, res) => {
     Art.find({}, (err, arts) => {
         if(err) return res.status(400).json({success: false, err});
         
@@ -33,7 +33,10 @@ app.get('/api/artslist', (req, res) => {
             else return -1;
         })
 
-        res.status(200).send(artsMap);
+        res.status(200).json({
+            success: true,
+            arts: artsMap,
+        })
     })
 })
 
