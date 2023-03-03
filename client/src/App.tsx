@@ -13,6 +13,8 @@ import ArtForm from './views/ArtFormPage/ArtForm';
 
 import { Art } from './interface';
 
+import demoJSON from './demo.json';
+
 import './App.scss';
 
 export interface Toggle {
@@ -31,9 +33,21 @@ const App = () => {
   const [arts, setArts] = useState<Array<Art>>([]);
 
   useEffect((): void => {
-    axios.get("https://artlog.herokuapp.com/api/artslist").then(res => {
-      setArts(res.data);
-    });
+    let artsMap: Array<Art> = [];
+    
+    demoJSON.forEach(art => {
+      let data: Art = {
+        name: art.name,
+        date: art.date,
+        note: art.note,
+        location: art.location,
+        base64img: art.base64img,
+        _id: art._id
+      };
+      artsMap.push(data);
+    })
+    setArts(artsMap);
+
   }, [])
 
   const onClickHandler = (e): void => {
