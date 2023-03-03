@@ -31,7 +31,7 @@ const App = () => {
   const [arts, setArts] = useState<Array<Art>>([]);
 
   useEffect((): void => {
-    axios.get("/api/artslist").then(res => {
+    axios.get("https://artlog.herokuapp.com/api/artslist").then(res => {
       setArts(res.data);
     });
   }, [])

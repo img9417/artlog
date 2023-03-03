@@ -31,7 +31,7 @@ const ArtForm = (props: Props) => {
         e.preventDefault();
 
         if(props.operationType === "delete") {
-            axios.post("/api/delete", {_id: _id})
+            axios.post("https://artlog.herokuapp.com/api/delete", {_id: _id})
             .then(res => {
                 if(res.data.success) {
                     props.onUpdateArts(res.data, _id);
@@ -52,7 +52,7 @@ const ArtForm = (props: Props) => {
         if(artInfo.note === '' || artInfo.location === '' || artInfo.date === '') return;
 
         if(props.operationType === "add") {
-            axios.post("/api/insert", artInfo)
+            axios.post("https://artlog.herokuapp.com/api/insert", artInfo)
             .then(res => {
                 if(res.data.success) {
                     dispatch(update({...artInfo, _id: `ObjectId("${res.data.id}")`}));
@@ -60,7 +60,7 @@ const ArtForm = (props: Props) => {
                 }
             })
         } else if(props.operationType === "edit") {
-            axios.post("/api/edit", {...artInfo, _id: _id})
+            axios.post("https://artlog.herokuapp.com/api/edit", {...artInfo, _id: _id})
             .then(res => {
                 if(res.data.success) {
                     props.onUpdateArts(artInfo, res.data.id);
