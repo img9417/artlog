@@ -1,5 +1,7 @@
 # Art Log
 
+[Live Demo](https://main--bprsstnt-artlog.netlify.app/) - insert/edit/delete is disabled.
+
 Artlog is an app to log my daily (outfit) drawings.
 
 ![Sample](./sample.jpg)
