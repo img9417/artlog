@@ -122,7 +122,7 @@ const App = () => {
       <span className='border'></span>
       <aside className='aside-left'>
         <p>
-          <a href="https://github.com/rolemadelen">@rolemadelen</a>
+          <a href="https://github.com/bprsstnt">@bprsstnt</a>
         </p>
         <div className="buttons">
           <div className="add-button" data-name="add" onClick={onClickHandler}>
