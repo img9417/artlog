@@ -124,7 +124,7 @@ const App = () => {
         <p>
           <a href="https://github.com/bprsstnt">@bprsstnt</a>
         </p>
-        <div className="buttons">
+        {/* <div className="buttons">
           <div className="add-button" data-name="add" onClick={onClickHandler}>
             {displayIcon("add")}
           </div>
@@ -134,7 +134,7 @@ const App = () => {
           <div className="delete-button" data-name="delete" onClick={onClickHandler}>
             {displayIcon("delete")}
           </div>
-        </div>
+        </div> */}
       </aside>
       <main className="main-frame">
         <Picture/>
