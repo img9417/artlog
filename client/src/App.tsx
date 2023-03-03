@@ -35,15 +35,8 @@ const App = () => {
   useEffect((): void => {
     let artsMap: Array<Art> = [];
     
-    demoJSON.forEach(art => {
-      let data: Art = {
-        name: art.name,
-        date: art.date,
-        note: art.note,
-        location: art.location,
-        base64img: art.base64img,
-        _id: art._id
-      };
+    JSON.parse(JSON.stringify(demoJSON)).forEach(art => {
+      let data: Art = {...art};
       artsMap.push(data);
     })
     setArts(artsMap);
