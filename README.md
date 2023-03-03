@@ -1,6 +1,6 @@
 # Art Log
 
-[Live Demo](https://main--bprsstnt-artlog.netlify.app/) - insert/edit/delete is disabled.
+[Live Demo](https://main--bprsstnt-artlog.netlify.app/) - insert/edit/delete is disabled. It might take some time to load existing data from MongoDB.
 
 Artlog is an app to log my daily (outfit) drawings.
 
