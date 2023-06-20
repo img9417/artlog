@@ -34,9 +34,9 @@ const App = () => {
 
   useEffect((): void => {
     let artsMap: Array<Art> = [];
-    
+
     JSON.parse(JSON.stringify(demoJSON)).forEach(art => {
-      let data: Art = {...art};
+      let data: Art = { ...art };
       artsMap.push(data);
     })
     setArts(artsMap);
@@ -45,8 +45,8 @@ const App = () => {
 
   const onClickHandler = (e): void => {
     const artFormWrapper: HTMLElement | null = document.querySelector('.art-form-wrapper');
-    if(artFormWrapper === null) return;
-    
+    if (artFormWrapper === null) return;
+
     const operation: string = e.currentTarget.dataset.name;
     const afwClassList: DOMTokenList = artFormWrapper.classList;
     afwClassList.add('hidden');
@@ -59,14 +59,14 @@ const App = () => {
 
     tggl[operation] = !toggle[operation];
 
-    if(tggl.add || tggl.edit || tggl.delete) {
+    if (tggl.add || tggl.edit || tggl.delete) {
       afwClassList.remove('hidden');
     }
 
     setOperationType(operation);
-    setToggle({...tggl});
+    setToggle({ ...tggl });
   }
-  
+
   const onUpdateArtsHandler = (artInfo: Art, id: string): void => {
     setToggle({
       add: false,
@@ -75,13 +75,13 @@ const App = () => {
     });
 
     const artFormWrapper: HTMLElement | null = document.querySelector('.art-form-wrapper');
-    if(artFormWrapper === null) return;
+    if (artFormWrapper === null) return;
 
     let temp: Array<Art> = [...arts];
 
-    switch(operationType) {
+    switch (operationType) {
       case "add": {
-        temp = [{...artInfo, _id: id}, ...temp];
+        temp = [{ ...artInfo, _id: id }, ...temp];
         const resetButton: HTMLElement | null = document.querySelector(".art-form-wrapper button[type='reset']");
         resetButton?.click();
 
@@ -89,7 +89,7 @@ const App = () => {
       }
       case "edit": {
         const index = temp.findIndex(art => art._id === id);
-        temp[index] = {...artInfo, _id: id};
+        temp[index] = { ...artInfo, _id: id };
 
         break;
       }
@@ -100,9 +100,9 @@ const App = () => {
         break;
       }
     }
-    
+
     temp.sort((a: Art, b: Art) => {
-      if(a.date < b.date) return 1;
+      if (a.date < b.date) return 1;
       else return -1;
     })
     setArts(temp);
@@ -111,10 +111,10 @@ const App = () => {
   }
 
   const displayIcon = (iconType: string): JSX.Element => {
-    if(iconType === "add") {
+    if (iconType === "add") {
       return toggle.add ? <UilMinusCircle size="30" /> : <UilPlusCircle size="30" />;
     }
-    else if(iconType === "edit") {
+    else if (iconType === "edit") {
       return toggle.edit ? <UilEditAlt size="30" /> : <UilEdit size="30" />;
     }
     else {
@@ -124,14 +124,14 @@ const App = () => {
   }
 
   return (
-   <>
-    <div className="wrapper">
-      <span className='border'></span>
-      <aside className='aside-left'>
-        <p>
-          <a href="https://github.com/bprsstnt">@bprsstnt</a>
-        </p>
-        {/* <div className="buttons">
+    <>
+      <div className="wrapper">
+        <span className='border'></span>
+        <aside className='aside-left'>
+          <p>
+            <a href="https://github.com/rolemadelen">@rolemadelen</a>
+          </p>
+          {/* <div className="buttons">
           <div className="add-button" data-name="add" onClick={onClickHandler}>
             {displayIcon("add")}
           </div>
@@ -142,14 +142,14 @@ const App = () => {
             {displayIcon("delete")}
           </div>
         </div> */}
-      </aside>
-      <main className="main-frame">
-        <Picture/>
-        <ArtForm operationType={operationType} onUpdateArts={onUpdateArtsHandler}/>
-      </main>
-      <DateList arts={arts}/>
-    </div>
-   </>
+        </aside>
+        <main className="main-frame">
+          <Picture />
+          <ArtForm operationType={operationType} onUpdateArts={onUpdateArtsHandler} />
+        </main>
+        <DateList arts={arts} />
+      </div>
+    </>
   )
 }
 App.displayName = 'App';
