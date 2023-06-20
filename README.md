@@ -13,7 +13,7 @@ Artlog is a daily art diary to document my daily outfit using Vite and MERN stac
   + React
   + State Management
     * Redux Toolkit
-  + Scss
+  + SCSS
   + Icons - [IconScout](https://iconscout.com/unicons/explore/line)
   + Axios
 - Server
